@@ -1,0 +1,6 @@
+terraform.tfstate
+terraform.tfstate.backup
+.idea
+node_modules
+terraform/.terraform/*
+

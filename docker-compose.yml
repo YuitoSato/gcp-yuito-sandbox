@@ -1,0 +1,20 @@
+version: '3'
+services:
+  nodejs-api:
+    container_name: nodejs_api
+    build:
+      context: ./nodejs-api
+      dockerfile: ./infra/development/Dockerfile
+    volumes:
+      - ./nodejs-api/:/usr/src/app/
+    ports:
+      - '3000:3000'
+
+  go-api:
+    container_name: go_api
+    build:
+      context: ./go-api
+    volumes:
+      - ./go-api/:/go/
+    ports:
+      - '8080:8080'

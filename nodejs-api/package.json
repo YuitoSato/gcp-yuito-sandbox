@@ -1,0 +1,48 @@
+{
+  "name": "nodejs-api",
+  "version": "0.0.1",
+  "description": "Create simple Typescirpt boilerplate with ts-node",
+  "main": "src/app/server.ts",
+  "author": "Tomoaki Kanayama",
+  "repository": "nodejs-api",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx nodemon 0.0r.0.0 3000",
+    "test": "npx jest --watchAll",
+    "staging-build": "webpack --config ./infra/staging/webpack.config.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "@types/jest": "^23.3.5",
+    "@types/node": "^10.12.0",
+    "jest": "^24.1.0",
+    "jest-runner-tslint": "^1.0.5",
+    "nodemon": "^1.18.4",
+    "ts-jest": "^23.10.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.0",
+    "tsutils": "^3.1.0",
+    "ts-loader": "^5.3.3",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "jest": {
+    "runner": "jest-runner-tslint",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "((\\.|/)(test))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testEnvironment": "node"
+  }
+}
