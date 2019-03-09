@@ -6,8 +6,7 @@ steps:
     args: ['npm', 'i']
 
   - name: 'node:11.10.0'
-    entrypoint: npm
-    args: ['run', 'staging-build']
+    args: ['npm', 'run', 'staging-build']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/gcp-yuito-sandbox/nodejs-api:latest', '.', '-f', 'infra/staging/Dockerfile']
