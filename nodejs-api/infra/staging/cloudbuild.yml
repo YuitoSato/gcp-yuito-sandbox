@@ -39,4 +39,9 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=gcp-yuito-sandbox'
     dir: 'nodejs-api'
 
-#images: ['gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['apply', '-f', 'infra/staging/nodejs-api-service.yml']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=gcp-yuito-sandbox'
+    dir: 'nodejs-api'
