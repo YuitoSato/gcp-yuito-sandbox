@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
         - name: nodejs-api
-          image: gcr.io/gcp-yuito-sandbox/nodejs-api:${VERSION}
+          image: gcr.io/gcp-yuito-sandbox/nodejs-api:COMMIT_SHA
           ports:
             - containerPort: 3000

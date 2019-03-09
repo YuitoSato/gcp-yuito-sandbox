@@ -25,10 +25,16 @@ steps:
     args: ['push', 'gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA']
     dir: 'nodejs-api'
 
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: '/bin/sh'
+    args:
+      - '-c'
+      - sed "s/COMMIT_SHA/${SHORT_SHA}/g" > infra/staging/nodejs-api-deployment.yml
+    dir: 'nodejs-api'
+
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'infra/staging/nodejs-api-deployment.yml']
     env:
-      - 'VERSION=$SHORT_SHA'
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
       - 'CLOUDSDK_CONTAINER_CLUSTER=gcp-yuito-sandbox'
     dir: 'nodejs-api'
