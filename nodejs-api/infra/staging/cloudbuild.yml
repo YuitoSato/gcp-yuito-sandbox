@@ -1,31 +1,38 @@
 steps:
   - name: 'node:11.10.0'
+    id: 'Clean node_modules'
     args: ['rm', '-rf', 'node_modules']
     dir: 'nodejs-api'
 
   - name: 'node:11.10.0'
+    id: 'Clean dist directory'
     args: ['rm', '-rf', 'dist']
     dir: 'nodejs-api'
 
   - name: 'node:11.10.0'
+    id: 'NPM Install'
     entrypoint: 'npm'
-    args: ['i']
+    args: ['install']
     dir: 'nodejs-api'
 
   - name: 'node:11.10.0'
+    id: 'Build Dist File'
     entrypoint: 'npm'
     args: ['run', 'staging-build']
     dir: 'nodejs-api'
 
   - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Image'
     args: ['build', '-t', 'gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA', '.', '-f', 'infra/staging/Dockerfile']
     dir: 'nodejs-api'
 
   - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push to GCR'
     args: ['push', 'gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA']
     dir: 'nodejs-api'
 
   - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Edit Deployment Manifest'
     entrypoint: '/bin/sh'
     args:
       - '-c'
@@ -33,6 +40,7 @@ steps:
     dir: 'nodejs-api'
 
   - name: 'gcr.io/cloud-builders/kubectl'
+    id: 'Apply Deployment Manifest'
     args: ['apply', '-f', 'infra/staging/nodejs-api-deployment.yml']
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
@@ -40,6 +48,7 @@ steps:
     dir: 'nodejs-api'
 
   - name: 'gcr.io/cloud-builders/kubectl'
+    id: 'Apply Service Manifest'
     args: ['apply', '-f', 'infra/staging/nodejs-api-service.yml']
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
