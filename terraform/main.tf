@@ -80,4 +80,8 @@ resource "google_cloudbuild_trigger" "default" {
   }
 
   filename = "nodejs-api/infra/staging/cloudbuild.yml"
+
+  included_files = [
+    "nodejs-api/**"
+  ]
 }
