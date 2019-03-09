@@ -23,6 +23,7 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA']
+    dir: 'nodejs-api'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'infra/staging/nodejs-api-development.yaml']
@@ -30,4 +31,6 @@ steps:
       - 'VERSION=$SHORT_SHA'
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
       - 'CLOUDSDK_CONTAINER_CLUSTER=gcp-yuito-sandbox'
+    dir: 'nodejs-api'
+
 #images: ['gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA']
