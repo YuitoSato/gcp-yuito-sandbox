@@ -26,7 +26,7 @@ steps:
     dir: 'nodejs-api'
 
   - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['apply', '-f', 'infra/staging/nodejs-api-deployment.yaml']
+    args: ['apply', '-f', 'infra/staging/nodejs-api-deployment.yml']
     env:
       - 'VERSION=$SHORT_SHA'
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
