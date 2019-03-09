@@ -1,16 +1,20 @@
 steps:
   - name: 'node:11.10.0'
     args: ['rm', '-rf', 'node_modules']
+    dir: 'nodejs-api'
 
   - name: 'node:11.10.0'
     args: ['npm', 'i']
+    dir: 'nodejs-api'
 
-#  - name: 'gcr.io/cloud-builders/npm'
-#    args: ['run', 'staging-build']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'staging-build']
+    dir: 'nodejs-api'
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/gcp-yuito-sandbox/nodejs-api:latest', '.', '-f', 'infra/staging/Dockerfile']
+    args: ['build', '-t', 'gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA', '.', '-f', 'infra/staging/Dockerfile']
+    dir: 'nodejs-api'
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/gcp-yuito-sandbox/nodejs-api:latest']
-#images: ['gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA']
+#  - name: 'gcr.io/cloud-builders/docker'
+#    args: ['push', 'gcr.io/gcp-yuito-sandbox/nodejs-api:latest']
+images: ['gcr.io/gcp-yuito-sandbox/nodejs-api:$SHORT_SHA']
