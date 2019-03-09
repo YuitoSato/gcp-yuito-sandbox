@@ -5,7 +5,7 @@ steps:
   - name: 'node:11.10.0'
     args: ['npm', 'i']
 
-  - name: 'node:11.10.0'
+  - name: 'gcr.io/cloud-builders/npm'
     args: ['npm', 'run', 'staging-build']
 
   - name: 'gcr.io/cloud-builders/docker'
