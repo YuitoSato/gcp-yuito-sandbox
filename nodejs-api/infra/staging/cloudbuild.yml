@@ -4,6 +4,10 @@ steps:
     dir: 'nodejs-api'
 
   - name: 'node:11.10.0'
+    args: ['rm', '-rf', 'dist']
+    dir: 'nodejs-api'
+
+  - name: 'node:11.10.0'
     entrypoint: 'npm'
     args: ['i']
     dir: 'nodejs-api'
